@@ -1,23 +1,25 @@
 defmodule AOC do
 
   def day_1_part_1(input_lines) do
-    day_1_top_n_summed(input_lines, 1)
+    day_1_top_n_calories_summed(input_lines, 1)
   end
 
   def day_1_part_2(input_lines) do
-    day_1_top_n_summed(input_lines, 3)
+    day_1_top_n_calories_summed(input_lines, 3)
   end
 
-  defp day_1_top_n_summed(input_lines, n) do
+  # https://adventofcode.com/2022/day/1
+  defp day_1_top_n_calories_summed(input_lines, n) do
     input_lines
     |> Enum.chunk_by(&(&1 == ""))
     |> Enum.filter(&(&1 != [""]))
-    |> Enum.map(fn lists -> Enum.map(lists, &String.to_integer/1) end)
-    |> Enum.with_index(1)
-    |> Enum.map(fn {values, position} -> {values, Enum.sum(values), position} end)
-    |> Enum.sort_by(&(elem(&1, 1)), :desc)
+    |> Enum.map(fn carried_calories ->
+      carried_calories
+      |> Enum.map(&String.to_integer/1)
+      |> Enum.sum
+    end)
+    |> Enum.sort(:desc)
     |> Enum.take(n)
-    |> Enum.map(&(elem(&1, 1)))
     |> Enum.sum
   end
 

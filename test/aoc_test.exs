@@ -9,7 +9,7 @@ defmodule AOCTest do
   end
 
   test "Day 2 Part 2" do
-    output_sample = AOC.load_input_lines(1, "full") |> AOC.day_1_part_2
+    output_sample = AOC.load_input_lines(1, "sample") |> AOC.day_1_part_2
 
     assert output_sample == 45000
   end
